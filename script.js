@@ -61,6 +61,14 @@ if (extrasToggle) {
 }
 
 const changelogData = [
+    {version:"1.2",
+        changes:[
+            "Auto trasher & auto tech repair (only visible when in menu)",
+            "Tool switch, when looking at stains, will switch to a mop if available, same with sponge",
+            "Improved and reworked many of the other features",
+            "Fixed one of the features being partially detectable due to faulty code"
+        ]
+    },
     {
         version: "1.11",
         changes: [
