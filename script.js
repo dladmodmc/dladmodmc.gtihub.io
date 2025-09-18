@@ -4,15 +4,16 @@ document.querySelector('.nav-toggle')?.addEventListener('click', () => {
 });
 
 const faqData = [
-    ["Which Minecraft versions are supported?", "Fabric 1.21 and above. Any java version"],
-    ["How do I open the menu?", "The default key is shift + . This can be changed inside the menu"],
-    ["Virus?", "Source: <a href='https://github.com/dladmodmc/dladmodsource' target='_blank'>GitHub</a><br>No, the mod is safe to use, scanning it WILL return clean. Always download/update this mod either from THIS website, modrinth or curseforge, we will NEVER send you the mod through discord. The only external request the mod makes is to this very same website to check the version and see if an update is available, absolutely no telemetry, no data collection."],
-    ["How do I install?", "<div style='text-align: center;'>Installation is simple, you can either download it from curseforge/modrinth or doing it manually like so:<br><br>1) Make sure you have Java installed (<a href='https://docs.fabricmc.net/players/installing-java/windows' target='_blank'>see Fabric guide</a>)<br><br>2) Download and run the Fabric installer from the <a href='https://fabricmc.net/use/' target='_blank'>official site</a> for Minecraft version 1.21 or later <br><br>3) Download both the <a href='https://www.curseforge.com/minecraft/mc-mods/fabric-api' target='_blank'>Fabric API</a> and <a href='downloads.html'>dlad mod</a> .jar files for your selected Minecraft version <br><br>4) Place both .jar files in your Minecraft's <a href='https://docs.fabricmc.net/players/installing-mods' target='_blank'><code>mods/</code> folder</a><br><br>5) Launch Minecraft using the <a href='https://docs.fabricmc.net/players/installing-fabric' target='_blank'>Fabric profile</a> in the launcher<br><br>For detailed instructions, visit the <a href='https://docs.fabricmc.net/players/faq' target='_blank'>Fabric Player FAQ</a>.</div>"],
-    ["Is the mod detectable?", "No, as long as you're responsible and use the features wisely, in itself dlad is not detectable as it's all client side. But be cautious as mods can still see suspicious behaviour."],
-    ["Will I get banned?", "The quick answer is no, but that heavily depends on how you use the mod yourself. If you're going around going to every single escape, getting every sausage tm, you might get mods suspicious on you, this is just as people using hacked clients, you must use it responsibly."],
-    ["Open source?", "Source: <a href='https://github.com/dladmodmc/dladmodsource' target='_blank'>GitHub</a><br>Yes, but partially. Every part of the code is able to be seen except for how the features detect and how the mod is enabled/disabled depending on if you're in mlum or not, these measures are set to prevent staff from making patches."],
-    ["I still don't believe it aint a virus!!!", "Go scan it with <a href='https://www.virustotal.com/' target='_blank'>VirusTotal</a> you paranoid ahh. It's just going to say it's safe because it's SAFE!!!! Staff are actively attempting to deter players from using this mod by suggesting/saying it's a rat, which a rat CAN and WILL be detected by any antivirus, so go ahead and scan it with all you have"]
-    ];
+    ["How do I use the mod?", "To open the menu that brings up all the features, while in the main menu or the escape menu, press shift + . (this can be changed in the dlad mod menu itself). Features such as meteor detector allows you to hover over the display and pressing middle click to hide said display (also avilable for sausage finder)"],
+    ["Is dlad mod safe?", 'Short answer:<br>- Yes, dlad mod is 100% safe as long as you download it from our <a href="https://dladmodmc.github.io/dladmodmc/downloads.html">official website</a><br><br><a href="https://www.virustotal.com/gui/file/a976ffeb939c3e38e405f040af2d20293c777262cf8aa22d062fd8d56f08b80f">Virustotal</a><br><br>Long answer:<br> - If the dlad mod file comes directly from our website it is gauranteed to be safe, and so we encourage you ONLY download it from here. While the features from the mod are not open source, the surrounding code and the website is, this is available <a href="https://github.com/dladmodmc/dladmodsource">here</a>.'],
+    ["How do I install?", "<div style='text-align: center;'>Installation must be done manually:<br><br>1) Make sure you have Java installed (<a href='https://docs.fabricmc.net/players/installing-java/windows' target='_blank'>see Fabric guide</a>)<br><br>2) Download and run the Fabric installer from the <a href='https://fabricmc.net/use/' target='_blank'>official site</a> for Minecraft version 1.21 or later <br><br>3) Download both the <a href='https://www.curseforge.com/minecraft/mc-mods/fabric-api' target='_blank'>Fabric API</a> and <a href='downloads.html'>dlad mod</a> .jar files for your selected Minecraft version <br><br>4) Place both .jar files in your Minecraft's <a href='https://docs.fabricmc.net/players/installing-mods' target='_blank'><code>mods/</code> folder</a><br><br>5) Launch Minecraft using the <a href='https://docs.fabricmc.net/players/installing-fabric' target='_blank'>Fabric profile</a> in the launcher<br><br>For detailed instructions, visit the <a href='https://docs.fabricmc.net/players/faq' target='_blank'>Fabric Player FAQ</a>.</div>"],
+    ["Is the mod detectable?", "No, as long as you're responsible and use the features wisely, in itself dlad is not detectable as it's all client side (exception of autofish). But caution is always advised as staff can see suspicious behaviour."],
+    ["Will I get banned for using the mod?", "No, the mod only provides you with information (exception of autofish) and allows you to take advantage of that information. As long as whatever you do isn't blatantly obvious, you should be fine."],
+    ["Open source?", "Source: <a href='https://github.com/dladmodmc/dladmodsource' target='_blank'>GitHub</a><br>The features themselves are not open source, but the surrounding code and website is. This is to prevent easy patching of the features, please understand with the mod being fully open source, the features might last much less (if the devs are competent)."],
+    ["Why these features?", "As a client side mod, we're limited to what we can do while being undetectable. This means most features most features mainly just give you advantageous information specific to mlum, allowing you to decide what to do with said information. This gaurantees the mod never interacts server side (exception of autofish) making it practically undetectable."],
+    ["Why display features like this?","We focus on a non-intrusive display, giving you the option to change where the hud is located and changing the size of the displays while keeping a minimal design. To give you the relevant information we rely on an esp like display, keeping it simple and non intrusive."]
+    
+];
 
 function initFAQ() {
     const faqContainer = document.querySelector('main');
@@ -49,24 +50,31 @@ if (window.location.pathname.includes('faq.html')) {
     initFAQ();
 }
 
-const extrasToggle = document.querySelector('.extras-toggle');
-if (extrasToggle) {
-    extrasToggle.addEventListener('click', () => {
+
+const toggleButton = document.querySelector('.extras-toggle');
+if (toggleButton) {
+    toggleButton.addEventListener('click', () => {
         const content = document.querySelector('.extras-content');
         const isOpen = content.style.display === 'block';
         content.style.display = isOpen ? 'none' : 'block';
-        extrasToggle.textContent = isOpen ? 'Extras ▼' : 'Extras ▲';
-        extrasToggle.classList.toggle('active');
+        const baseText = toggleButton.getAttribute('data-text') || toggleButton.textContent.replace(/[▼▲]/, '').trim();
+        toggleButton.textContent = `${baseText} ${isOpen ? '▼' : '▲'}`;
+        toggleButton.classList.toggle('active');
     });
 }
+
+
+
 
 const changelogData = [
     {version:"1.2",
         changes:[
-            "Auto trasher & auto tech repair (only visible when in menu)",
-            "Tool switch, when looking at stains, will switch to a mop if available, same with sponge",
-            "Improved and reworked many of the other features",
-            "Fixed one of the features being partially detectable due to faulty code"
+            "Full rework of many features, improving performance and stability",
+            "Added job helper",
+            "Reworked sausage finder, now equiped with the locations of all sausages, it can show you the location up to any radius",
+            "Meteor detector now shows distance from meteor to player",
+            "Sausage finder & meteor detector now have extra functionality, middle click while looking at one of the displays to remove it",
+            "Now offering public world download of mlum map and sausage locations (all available in downloads page)",
         ]
     },
     {
@@ -110,4 +118,50 @@ function initChangelog() {
 
 if (window.location.pathname.includes('index.html') || window.location.pathname.endsWith('/')) {
     initChangelog();
+}
+
+// Create popup elements
+const popup = document.createElement('div');
+popup.className = 'popup-overlay';
+const popupContainer = document.createElement('div');
+popupContainer.className = 'popup-container';
+const popupImage = document.createElement('img');
+popupImage.className = 'popup-image';
+popupContainer.appendChild(popupImage);
+popup.appendChild(popupContainer);
+document.body.appendChild(popup);
+
+// Add click handlers to all gallery images
+document.querySelectorAll('.features img').forEach(img => {
+    img.classList.add('gallery-image');
+    img.addEventListener('click', (e) => {
+        popupImage.src = e.target.src;
+        popup.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    });
+});
+
+// Handle popup clicks
+popup.addEventListener('click', (e) => {
+    if (e.target === popup) {
+        closePopup();
+    }
+});
+
+popupImage.addEventListener('click', (e) => {
+    e.stopPropagation();
+    popupImage.classList.toggle('zoomed');
+});
+
+// Close on escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && popup.style.display === 'block') {
+        closePopup();
+    }
+});
+
+function closePopup() {
+    popup.style.display = 'none';
+    popupImage.classList.remove('zoomed');
+    document.body.style.overflow = '';
 }
