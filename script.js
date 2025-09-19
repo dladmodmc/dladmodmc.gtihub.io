@@ -11,7 +11,8 @@ const faqData = [
     ["Will I get banned for using the mod?", "No, the mod only provides you with information (exception of autofish) and allows you to take advantage of that information. As long as whatever you do isn't blatantly obvious, you should be fine."],
     ["Open source?", "Source: <a href='https://github.com/dladmodmc/dladmodsource' target='_blank'>GitHub</a><br>The features themselves are not open source, but the surrounding code and website is. This is to prevent easy patching of the features, please understand with the mod being fully open source, the features might last much less (if the devs are competent)."],
     ["Why these features?", "As a client side mod, we're limited to what we can do while being undetectable. This means most features most features mainly just give you advantageous information specific to mlum, allowing you to decide what to do with said information. This gaurantees the mod never interacts server side (exception of autofish) making it practically undetectable."],
-    ["Why display features like this?","We focus on a non-intrusive display, giving you the option to change where the hud is located and changing the size of the displays while keeping a minimal design. To give you the relevant information we rely on an esp like display, keeping it simple and non intrusive."]
+    ["Why display features like this?","We focus on a non-intrusive display, giving you the option to change where the hud is located and changing the size of the displays while keeping a minimal design. To give you the relevant information we rely on an esp like display, keeping it simple and non intrusive."],
+    ["How regularly is the mod updated?", "As a single dev it may take from days to weeks to update. Also, as personally my life's been really busy, updates may be slow to come"]
     
 ];
 
