@@ -1,7 +1,31 @@
+// Mobile Navigation Toggle
 const header = document.querySelector('.site-header');
-document.querySelector('.nav-toggle')?.addEventListener('click', () => {
+const navToggle = document.querySelector('.nav-toggle');
+const siteNav = document.querySelector('.site-nav');
+
+navToggle.addEventListener('click', () => {
   header.classList.toggle('open');
+  navToggle.classList.toggle('active');
 });
+
+// Close mobile menu when clicking on a link
+if (siteNav) {
+  siteNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      header.classList.remove('open');
+      navToggle.classList.remove('active');
+    });
+  });
+}
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+  if (!header.contains(e.target)) {
+    header.classList.remove('open');
+    navToggle.classList.remove('active');
+  }
+});
+
 
 const faqData = [
     ["How do I use the mod?", "To open the menu that brings up all the features, while in the main menu or the escape menu, press shift + . (this can be changed in the dlad mod menu itself). Features such as meteor detector allows you to hover over the display and pressing middle click to hide said display (also avilable for sausage finder)"],
@@ -13,11 +37,15 @@ const faqData = [
     ["Why these features?", "As a client side mod, we're limited to what we can do while being undetectable. This means most features most features mainly just give you advantageous information specific to mlum, allowing you to decide what to do with said information. This gaurantees the mod never interacts server side (exception of autofish) making it practically undetectable."],
     ["Why display features like this?","We focus on a non-intrusive display, giving you the option to change where the hud is located and changing the size of the displays while keeping a minimal design. To give you the relevant information we rely on an esp like display, keeping it simple and non intrusive."],
     ["How regularly is the mod updated?", "As a single dev it may take from days to weeks to update. Also, as personally my life's been really busy, updates may be slow to come"]
-    
 ];
 
 function initFAQ() {
-    const faqContainer = document.querySelector('main');
+    // Only run on FAQ page
+    if (!window.location.pathname.includes('faq.html')) {
+        return;
+    }
+    
+    const faqContainer = document.querySelector('.hero');
     if (!faqContainer) return;
 
     const faqHTML = faqData.map(([question, answer]) => `
@@ -31,14 +59,17 @@ function initFAQ() {
     faqSection.innerHTML = faqHTML;
     faqContainer.appendChild(faqSection);
 
+    // Add click handlers to FAQ buttons
     document.querySelectorAll('.faq-question').forEach(btn => {
         btn.addEventListener('click', () => {
             const answer = btn.nextElementSibling;
             const isOpen = answer.classList.contains('open');
             
+            // Close all other open FAQs
             document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
             document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('active'));
             
+            // Open current FAQ if it wasn't open
             if (!isOpen) {
                 answer.classList.add('open');
                 btn.classList.add('active');
@@ -47,9 +78,8 @@ function initFAQ() {
     });
 }
 
-if (window.location.pathname.includes('faq.html')) {
-    initFAQ();
-}
+// Initialize FAQ on page load
+document.addEventListener('DOMContentLoaded', initFAQ);
 
 
 const toggleButton = document.querySelector('.extras-toggle');
