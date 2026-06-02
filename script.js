@@ -151,6 +151,197 @@ if (window.location.pathname.includes('index.html') || window.location.pathname.
     initChangelog();
 }
 
+const sausageStateKey = 'dladSausageChecklist';
+let sausageLocations = [];
+let playerCoords = null;
+let orderedByNearest = false;
+
+function parseCoords(value) {
+    const parts = value.match(/-?\d+(?:\.\d+)?/g);
+    if (!parts || parts.length < 3) return null;
+    return parts.slice(0, 3).map(Number);
+}
+
+function formatDistance(distance) {
+    return `${Math.round(distance)} blocks`;
+}
+
+function getCheckedSausages() {
+    try {
+        return new Set(JSON.parse(localStorage.getItem(sausageStateKey)) || []);
+    } catch {
+        return new Set();
+    }
+}
+
+function saveCheckedSausages(checked) {
+    localStorage.setItem(sausageStateKey, JSON.stringify([...checked]));
+}
+
+function getSausageDistance(location) {
+    if (!playerCoords || !location.coords) return null;
+    const [x, y, z] = location.coords;
+    const [px, py, pz] = playerCoords;
+    return Math.hypot(x - px, y - py, z - pz);
+}
+
+function getSausageImagePath(location) {
+    return `images/sausages/${encodeURIComponent(location.label)}.png`;
+}
+
+function renderSausages() {
+    const list = document.getElementById('sausage-list');
+    const count = document.getElementById('sausage-count');
+    if (!list || !count) return;
+
+    const checked = getCheckedSausages();
+    const sorted = [...sausageLocations].sort((a, b) => {
+        const checkedDelta = Number(checked.has(a.id)) - Number(checked.has(b.id));
+        if (checkedDelta) return checkedDelta;
+        if (orderedByNearest && playerCoords) return getSausageDistance(a) - getSausageDistance(b);
+        return a.index - b.index;
+    });
+
+    const checkedCount = sorted.filter(item => checked.has(item.id)).length;
+    count.textContent = `${checkedCount}/${sorted.length} checked`;
+
+    list.innerHTML = sorted.map(location => {
+        const isChecked = checked.has(location.id);
+        const distance = orderedByNearest ? getSausageDistance(location) : null;
+        const distanceText = distance === null ? '' : `<span class="sausage-distance">${formatDistance(distance)}</span>`;
+        const hasImage = location.hasImage === true;
+        const imageText = location.hasImage === false ? 'No Image' : 'Image';
+        return `
+            <li class="sausage-item${isChecked ? ' checked' : ''}${hasImage ? '' : ' no-image'}" data-id="${location.id}">
+                <div class="sausage-row">
+                    <input type="checkbox" ${isChecked ? 'checked' : ''} aria-label="Mark ${location.label} checked">
+                    <span class="sausage-coords">${location.label}</span>
+                    ${distanceText}
+                    <button class="sausage-image-toggle" type="button" ${hasImage ? '' : 'disabled'}>${imageText}</button>
+                </div>
+                <div class="sausage-image-wrap">
+                    <img data-src="${getSausageImagePath(location)}" alt="Sausage at ${location.label}" loading="lazy">
+                </div>
+            </li>
+        `;
+    }).join('');
+
+    list.querySelectorAll('input[type="checkbox"]').forEach(input => {
+        input.addEventListener('click', event => event.stopPropagation());
+        input.addEventListener('change', event => {
+            const id = event.target.closest('.sausage-item').dataset.id;
+            const current = getCheckedSausages();
+            if (event.target.checked) {
+                current.add(id);
+            } else {
+                current.delete(id);
+            }
+            saveCheckedSausages(current);
+            renderSausages();
+        });
+    });
+
+    list.querySelectorAll('.sausage-item').forEach(item => {
+        item.addEventListener('click', event => {
+            if (item.classList.contains('no-image')) return;
+            const image = item.querySelector('.sausage-image-wrap');
+            const img = image.querySelector('img');
+            if (!img.src) img.src = img.dataset.src;
+            image.classList.toggle('open');
+        });
+    });
+}
+
+function updateNearestSausage() {
+    const input = document.getElementById('player-coords');
+    const result = document.getElementById('nearest-result');
+    if (!input || !result) return;
+
+    playerCoords = parseCoords(input.value);
+    if (!playerCoords) {
+        orderedByNearest = false;
+        result.textContent = 'Enter coordinates as x, y, z.';
+        result.classList.add('sausage-error');
+        renderSausages();
+        return;
+    }
+
+    result.classList.remove('sausage-error');
+    orderedByNearest = true;
+
+    if (!sausageLocations.length) {
+        result.textContent = 'No sausage locations loaded.';
+        return;
+    }
+
+    result.textContent = 'Ordered by nearest.';
+    renderSausages();
+}
+
+function checkSausageImages() {
+    sausageLocations.forEach(location => {
+        fetch(getSausageImagePath(location), { method: 'HEAD' })
+            .then(response => {
+                location.hasImage = response.ok;
+                renderSausages();
+            })
+            .catch(() => {
+                location.hasImage = false;
+                renderSausages();
+            });
+    });
+}
+
+function initSausages() {
+    const list = document.getElementById('sausage-list');
+    if (!list) return;
+
+    fetch('internal/sausages.txt')
+        .then(response => {
+            if (!response.ok) throw new Error('Could not load sausage locations.');
+            return response.text();
+        })
+        .then(text => {
+            sausageLocations = text.split(/\r?\n/)
+                .map(line => line.trim())
+                .filter(Boolean)
+                .map((label, index) => ({
+                    id: label,
+                    label,
+                    index,
+                    coords: parseCoords(label),
+                    hasImage: null
+                }));
+
+            if (!sausageLocations.length) {
+                document.getElementById('sausage-count').textContent = 'No locations found in internal/sausages.txt.';
+                return;
+            }
+
+            renderSausages();
+            checkSausageImages();
+        })
+        .catch(error => {
+            document.getElementById('sausage-count').textContent = error.message;
+            document.getElementById('sausage-count').classList.add('sausage-error');
+        });
+
+    const nearestButton = document.getElementById('nearest-sausage');
+    const coordInput = document.getElementById('player-coords');
+    const resetButton = document.getElementById('reset-sausages');
+
+    if (nearestButton) nearestButton.addEventListener('click', updateNearestSausage);
+    if (coordInput) coordInput.addEventListener('keydown', event => {
+        if (event.key === 'Enter') updateNearestSausage();
+    });
+    if (resetButton) resetButton.addEventListener('click', () => {
+        localStorage.removeItem(sausageStateKey);
+        renderSausages();
+    });
+}
+
+document.addEventListener('DOMContentLoaded', initSausages);
+
 // Create popup elements
 const popup = document.createElement('div');
 popup.className = 'popup-overlay';

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="./images/dlad.png" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Track dlad sausage locations with a saved checklist and nearest-location helper.">
+  <meta name="keywords" content="minecraft, dlad, sausage locations, checklist">
+  <title>Sausages - dlad Mod</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body style="background: url('./images/backgroundindex.png') no-repeat center center fixed; background-size: cover;">
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo">dlad</h1>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="downloads.html">Downloads</a>
+        <a href="sausages.html">Sausages</a>
+        <a href="faq.html">FAQ</a>
+        <a href="https://forms.gle/FnJ2d6HHhHu3UjeQ6">Feedback [EXT]</a>
+      </nav>
+      <button class="nav-toggle" aria-label="toggle navigation">☰</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero sausage-hero">
+      <h1>Sausage Locations</h1>
+      <p class="hero-subtitle">Saved checklist for every sausage sign.</p>
+      <div class="sausage-tools">
+        <label class="coordinate-label" for="player-coords">Your coordinates</label>
+        <input id="player-coords" class="coordinate-input" type="text" inputmode="numeric" placeholder="x, y, z">
+        <button id="nearest-sausage" class="sausage-action" type="button">Order by Nearest</button>
+      </div>
+      <p id="nearest-result" class="note-text" aria-live="polite"></p>
+    </section>
+
+    <section class="features sausage-panel">
+      <div class="sausage-summary">
+        <h2>Checklist</h2>
+        <button id="reset-sausages" class="extras-toggle" type="button">Reset Checklist</button>
+      </div>
+      <p id="sausage-count" class="note-text">Loading locations...</p>
+      <ul id="sausage-list" class="sausage-list"></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 dlad mod</p>
+      <p>Made by EVC</p>
+      <p>Source: <a href="https://github.com/dladmodmc/dladmodsource" target="_blank">GitHub</a></p>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
