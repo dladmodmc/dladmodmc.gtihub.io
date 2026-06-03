@@ -28,15 +28,63 @@ document.addEventListener('click', (e) => {
 
 
 const faqData = [
-    ["How do I use the mod?", "To open the menu that brings up all the features, while in the main menu or the escape menu, press shift + . (this can be changed in the dlad mod menu itself). Features such as meteor detector allows you to hover over the display and pressing middle click to hide said display (also avilable for sausage finder)"],
-    ["Is dlad mod safe?", 'Short answer:<br>- Yes, dlad mod is 100% safe as long as you download it from our <a href="https://dladmodmc.github.io/dladmodmc/downloads.html">official website</a><br><br><a href="https://www.virustotal.com/gui/file/a976ffeb939c3e38e405f040af2d20293c777262cf8aa22d062fd8d56f08b80f">Virustotal</a><br><br>Long answer:<br> - If the dlad mod file comes directly from our website it is guaranteed to be safe, and so we encourage you ONLY download it from here. This project is open source and available <a href="https://github.com/dladmodmc/dladmodsource">here</a>.'],
-    ["How do I install?", "<div style='text-align: center;'>Installation must be done manually:<br><br>1) Make sure you have Java installed (<a href='https://docs.fabricmc.net/players/installing-java/windows' target='_blank'>see Fabric guide</a>)<br><br>2) Download and run the Fabric installer from the <a href='https://fabricmc.net/use/' target='_blank'>official site</a> for Minecraft version 1.21 or later <br><br>3) Download both the <a href='https://www.curseforge.com/minecraft/mc-mods/fabric-api' target='_blank'>Fabric API</a> and <a href='downloads.html'>dlad mod</a> .jar files for your selected Minecraft version <br><br>4) Place both .jar files in your Minecraft's <a href='https://docs.fabricmc.net/players/installing-mods' target='_blank'><code>mods/</code> folder</a><br><br>5) Launch Minecraft using the <a href='https://docs.fabricmc.net/players/installing-fabric' target='_blank'>Fabric profile</a> in the launcher<br><br>For detailed instructions, visit the <a href='https://docs.fabricmc.net/players/faq' target='_blank'>Fabric Player FAQ</a>.</div>"],
-    ["Is the mod detectable?", "No, as long as you're responsible and use the features wisely, in itself dlad is not detectable as it's all client side (exception of autofish). But caution is always advised as staff can see suspicious behaviour."],
-    ["Will I get banned for using the mod?", "No, the mod only provides you with information (exception of autofish) and allows you to take advantage of that information. As long as whatever you do isn't blatantly obvious, you should be fine."],
+    ["How do I use the mod?", "To open the menu, press Shift + . while on the main menu or escape menu. You can change this shortcut in the dlad mod menu. Features such as the meteor detector and sausage finder let you hover over the display and middle-click to hide it."],
+    ["Is dlad mod safe?", 'Short answer:<br>- Yes, dlad mod is safe as long as you download it from our <a href="https://dladmodmc.github.io/dladmodmc/downloads.html">official website</a>.<br><br><a href="https://www.virustotal.com/gui/file/a976ffeb939c3e38e405f040af2d20293c777262cf8aa22d062fd8d56f08b80f">VirusTotal</a><br><br>Long answer:<br>- If the dlad mod file comes directly from our website, it is guaranteed to be safe. We encourage you to download it only from here. This project is open source and available <a href="https://github.com/dladmodmc/dladmodsource">here</a>.'],
+    ["How do I install?", "<div style='text-align: center;'>Installation must be done manually:<br><br>1. Make sure you have Java installed (<a href='https://docs.fabricmc.net/players/installing-java/windows' target='_blank'>see the Fabric guide</a>).<br><br>2. Download and run the Fabric installer from the <a href='https://fabricmc.net/use/' target='_blank'>official site</a> for Minecraft version 1.21 or later.<br><br>3. Download both the <a href='https://www.curseforge.com/minecraft/mc-mods/fabric-api' target='_blank'>Fabric API</a> and <a href='downloads.html'>dlad mod</a> .jar files for your selected Minecraft version.<br><br>4. Place both .jar files in your Minecraft <a href='https://docs.fabricmc.net/players/installing-mods' target='_blank'><code>mods/</code> folder</a>.<br><br>5. Launch Minecraft using the <a href='https://docs.fabricmc.net/players/installing-fabric' target='_blank'>Fabric profile</a> in the launcher.<br><br>For detailed instructions, visit the <a href='https://docs.fabricmc.net/players/faq' target='_blank'>Fabric Player FAQ</a>.</div>"],
+    ["Is the mod detectable?", "No, as long as you use the features responsibly. dlad is client-side except for autofish. Caution is still advised, because staff may notice suspicious behavior."],
+    ["Will I get banned for using the mod?", "The mod only provides information, except for autofish, and lets you decide how to use it. As long as your behavior is not blatant, you should be fine."],
     ["Open source?", "Source: <a href='https://github.com/dladmodmc/dladmodsource' target='_blank'>GitHub</a><br>This project is fully open source."],
-    ["Why these features?", "As a client side mod, we're limited to what we can do while being undetectable. This means most features mainly just give you advantageous information specific to mlum, allowing you to decide what to do with said information. This guaranteed the mod never interacts server side (exception of autofish) making it practically undetectable."],
-    ["Why display features like this?","We focus on a non-intrusive display, giving you the option to change where the hud is located and changing the size of the displays while keeping a minimal design. To give you the relevant information we rely on an esp like display, keeping it simple and non intrusive."],
-    ["How regularly is the mod updated?", "As a single dev it may take from days to weeks to update. Also, as personally my life's been really busy, updates may be slow to come"]
+    ["Why these features?", "As a client-side mod, dlad is limited to features that can stay undetectable. Most features provide Mlum-specific information, letting you decide what to do with it. This means the mod does not interact with the server, except for autofish."],
+    ["Why display features like this?", "We focus on non-intrusive displays. You can change HUD positions and display sizes while keeping the layout minimal. ESP-style displays provide relevant information without getting in the way."],
+    ["How often is the mod updated?", "As a single-developer project, updates can take anywhere from a few days to a few weeks. Updates may be slower when life gets busy."]
+];
+
+const featureData = [
+    {
+        title: "Completely Hidden",
+        description: "Every feature can be disabled, and the mod sends no chat messages.",
+        usage: "Keep only the displays you need enabled when you want a low-profile setup."
+    },
+    {
+        title: "Privacy Focused",
+        description: "No personal data is collected or transmitted.",
+        usage: 'Review the project source any time on <a href="https://github.com/dladmodmc/dladmodsource" target="_blank">GitHub</a>.'
+    },
+    {
+        title: "Escape Detector",
+        description: "Displays escapee's locations.",
+        usage: "Use it as a guard or prisoner when you need quick escape-location context."
+    },
+    {
+        title: "Guard Finder",
+        description: "Shows nearby guards with color coding for role and distance.",
+        usage: "Watch the display while moving through risky areas."
+    },
+    {
+        title: "Autofish",
+        description: "Automates fishing and is the only server-side action performed by the mod.",
+        usage: "Enable it only when you intentionally want automated fishing."
+    },
+    {
+        title: "Sausage Finder",
+        description: "Displays sausage sign locations within a chosen radius.",
+        usage: 'Use the display or the <a href="sausages.html">Sausages</a> page checklist to track finds.'
+    },
+    {
+        title: "Meteor Finder",
+        description: "Shows regular and gold meteors based on render distance.",
+        usage: "Middle-click the display while hovering over it to hide a meteor marker."
+    },
+    {
+        title: "Job Helper",
+        description: "Adds job context for farming, Mars fixing, turnip bottling, mopping, and metal detecting.",
+        usage: "Follow the highlighted blocks or nearest important targets."
+    },
+    {
+        title: "QOL Texture Pack",
+        description: "Makes stains and cleanup spots easier to see.",
+        usage: 'Download it from the <a href="downloads.html">Downloads</a> page and enable it as a resource pack.'
+    }
 ];
 
 function initFAQ() {
@@ -81,6 +129,34 @@ function initFAQ() {
 // Initialize FAQ on page load
 document.addEventListener('DOMContentLoaded', initFAQ);
 
+function initFeatureChips() {
+    const featureGrid = document.getElementById('feature-grid');
+    if (!featureGrid) return;
+
+    featureGrid.innerHTML = featureData.map(feature => `
+        <article class="feature-chip">
+            <button class="feature-chip-toggle" type="button" aria-expanded="false">
+                <span class="feature-title">${feature.title}</span>
+                <span class="feature-cue" aria-hidden="true">+</span>
+            </button>
+            <div class="feature-chip-body">
+                <p>${feature.description}</p>
+                <p>${feature.usage}</p>
+            </div>
+        </article>
+    `).join('');
+
+    document.querySelectorAll('.feature-chip-toggle').forEach(button => {
+        button.addEventListener('click', () => {
+            const chip = button.closest('.feature-chip');
+            const isOpen = chip.classList.toggle('open');
+            button.setAttribute('aria-expanded', String(isOpen));
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', initFeatureChips);
+
 
 const toggleButton = document.querySelector('.extras-toggle');
 if (toggleButton) {
@@ -100,18 +176,18 @@ if (toggleButton) {
 const changelogData = [
     {version:"1.2",
         changes:[
-            "Full rework of many features, improving performance and stability",
-            "Added job helper",
-            "Reworked sausage finder, now equiped with the locations of all sausages, it can show you the location up to any radius",
-            "Meteor detector now shows distance from meteor to player",
-            "Sausage finder & meteor detector now have extra functionality, middle click while looking at one of the displays to remove it",
-            "Now offering public world download of mlum map and sausage locations (all available in downloads page)",
+            "Fully reworked many features, improving performance and stability",
+            "Added Job Helper",
+            "Reworked Sausage Finder. It now includes all sausage locations and can show locations up to any radius",
+            "Meteor Detector now shows the distance from each meteor to the player",
+            "Sausage Finder and Meteor Detector now support middle-clicking a display to remove it",
+            "Added a public Mlum world download and sausage locations, both available on the Downloads page",
         ]
     },
     {
         version: "1.11",
         changes: [
-            "Reworked meteor detector, can now reach greater distances (render distance) and shows different colors depending on meteor rarity",
+            "Reworked Meteor Detector. It can now reach greater distances based on render distance and uses different colors depending on meteor rarity",
             "Improved stability"
         ]
     },
@@ -120,10 +196,10 @@ const changelogData = [
         version: "1.1",
         changes: [
             "Support for all 1.21.x versions",
-            "The size of warnings can now be edited for each feature (except autofish)",
-            "Sausage finder now will check in a radius around the camera, making it compatible with freecam mods",
-            "Reworked escape detector, fixes bug when the player goes out of render distance",
-            "Added meteor detector"
+            "Warning sizes can now be edited for each feature, except Autofish",
+            "Sausage Finder now checks a radius around the camera, making it compatible with freecam mods",
+            "Reworked Escape Detector and fixed a bug that occurred when a player left render distance",
+            "Added Meteor Detector"
         ]
     },
     {
@@ -210,7 +286,7 @@ function renderSausages() {
         const distance = orderedByNearest ? getSausageDistance(location) : null;
         const distanceText = distance === null ? '' : `<span class="sausage-distance">${formatDistance(distance)}</span>`;
         const hasImage = location.hasImage === true;
-        const imageText = location.hasImage === false ? 'No Image' : 'Image';
+        const imageText = location.hasImage === false ? 'No image' : 'Image';
         return `
             <li class="sausage-item${isChecked ? ' checked' : ''}${hasImage ? '' : ' no-image'}" data-id="${location.id}">
                 <div class="sausage-row">
@@ -274,7 +350,7 @@ function updateNearestSausage() {
         return;
     }
 
-    result.textContent = 'Ordered by nearest.';
+    result.textContent = 'Ordered by nearest sausage.';
     renderSausages();
 }
 
